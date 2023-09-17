@@ -28,20 +28,26 @@ const operator = (op, x, y) => {
     }
 }
 
-//creating a grid
-
+const filler = {
+    row4 : ["7", "8", "9" , "/"],
+    row3 : ["4", "5", "6" , "x"],
+    row2 : ["1", "2", "3" , "-"],
+    row1 : ["0", ".", "=" , "+"],
+}
 const grid = document.querySelector(".grid")
 
 const createGrid = () => {
-    for (let i = 4; i > 0; i--){
+    for (let x = 0; x < 4; x++){
         const row = document.createElement('div')
         row.classList.add('row')
-        row.classList.add("row"+`${i}`)
+        row.classList.add("row"+`${x}`)
         grid.appendChild(row)
-        for (let i = 4; i > 0; i--){
+        for (let i = 0; i < 4; i++){
             const box = document.createElement('div')
             box.classList.add("box")
             box.classList.add("box"+`${i}`)
+            let array = Object.values(filler)[x] 
+            box.textContent = `${array[i]}`
             row.appendChild(box)
         }
     }
@@ -52,5 +58,4 @@ createGrid()
 
 
 
-const something = document.querySelector("div.row")
 
