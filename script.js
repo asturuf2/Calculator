@@ -1,61 +1,70 @@
+const button = document.querySelectorAll(".button")
+const header = document.querySelector(".header")
 
-const add = (x, y) => {
-    return x + y;
-}
+button.forEach(element => {
+    element.addEventListener("click", (e) =>{
+        const value = e.target.dataset.value
+    
+       
+        if (value == "="){
+            if(header.innerText.includes('/')){
+                const split = header.innerText.split('/')
+                operator("/", split[0], split[1])
+            }
 
-const subtract = (x, y) => {
-    return x - y;
-}
+            if(header.innerText.includes('x')){
+                const split = header.innerText.split('x')
+                operator("x", split[0], split[1])
 
-const multiply = (x, y) => {
-    return x * y;
-}
+            }
+            if(header.innerText.includes('-')){
+                const split = header.innerText.split('-')
+                operator("-", split[0], split[1])
 
-const divide = (x, y) => {
-    return x / y;
-}
+            }
+            if(header.innerText.includes('+')){
+                const split = header.innerText.split('+')
+                operator("+", split[0], split[1])
 
-const operator = (op, x, y) => {
-    let o = op.toString();
-    if (o == "+"){
-        return add(x, y)
-    } else if (o == "-"){
-        return subtract(x, y)
-    } else if (o == "*"){
-        return multiply(x, y)
-    } else {
-        return divide(x, y)
-    }
-}
-
-const filler = {
-    row4 : ["7", "8", "9" , "/"],
-    row3 : ["4", "5", "6" , "x"],
-    row2 : ["1", "2", "3" , "-"],
-    row1 : ["0", ".", "=" , "+"],
-}
-const grid = document.querySelector(".grid")
-
-const createGrid = () => {
-    for (let x = 0; x < 4; x++){
-        const row = document.createElement('div')
-        row.classList.add('row')
-        row.classList.add("row"+`${x}`)
-        grid.appendChild(row)
-        for (let i = 0; i < 4; i++){
-            const box = document.createElement('div')
-            box.classList.add("box")
-            box.classList.add("box"+`${i}`)
-            let array = Object.values(filler)[x] 
-            box.textContent = `${array[i]}`
-            row.appendChild(box)
+            }
+        } else {
+         header.innerText += value;
         }
+    })
+})
+
+const clear = document.querySelector(".clear")
+clear.addEventListener("click", () => {
+    header.innerHTML = '';
+})
+
+const operator = (x, y, z) => {
+    let numOne = Number(y)
+    let numTwo = Number(z)
+
+    if(x == "/" ){
+        let value = (numOne/numTwo)
+        header.innerText = value
+    } else if (x == "x"){
+        let value = (numOne*numTwo)
+        header.innerText = value
+    } else if (x == "-"){
+        let value = (numOne-numTwo)
+        header.innerText = value
+    } else if (x == "+"){
+        let value = (numOne+numTwo)
+        header.innerText = value
     }
+    
+
 }
 
-createGrid()
+//if header.innerText.includes ( / or + or x or - )
 
+    //if an operator is clicked check to see if there is already an operate 
+    //if so, compute the prior expression and set the result as num 1
+    //if not 
 
-
-
-
+    // if (header.innerText.includes("/", "+", "-", "x") || value == "=")
+    //if (value = +, /, -, x) && header.innerText.includes("/", "+", "-", "x"))
+    // (value = "+" || value = "/" || value = "x" || value = "-" && header.innerText.includes("/", "+", "-", "x"))
