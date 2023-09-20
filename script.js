@@ -158,9 +158,13 @@ const operator = (x, y, z) => {
     let numOne = Number(y)
     let numTwo = Number(z)
     if(x == "/" ) {
-        let value = (numOne/numTwo)
-        let roundValue = Math.round(value*100)/100
-        header.innerText = roundValue
+        if (numTwo == 0){
+            header.innerText = "NONONONONONNO"
+        } else {
+            let value = (numOne/numTwo)
+            let roundValue = Math.round(value*100)/100
+            header.innerText = roundValue
+        }
     } else if (x == "x"){
         let value = (numOne*numTwo)
         header.innerText = value
