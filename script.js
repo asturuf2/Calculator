@@ -4,7 +4,7 @@ const header = document.querySelector(".header")
 button.forEach(element => {
     element.addEventListener("click", (e) =>{
         const value = e.target.dataset.value
-    
+        const string = header.innerText
        
         if (value == "="){
             if(header.innerText.includes('/')){
@@ -29,6 +29,15 @@ button.forEach(element => {
             }
         } else {
          header.innerText += value;
+         const string = header.innerText; 
+         const conditions = ["/", "+", "-", "x"]; 
+            if (string.includes("/") && string.charAt(string.length-1) == "+"){//((string.includes("/") || string.includes("+") || string.includes("-") || string.includes("x")) && (string.charAt(lastChar) == "/" || string.charAt(lastChar) == "/" || string.charAt(lastChar) == "-" || string.charAt(lastChar) == "+")){
+                const removeChar = string.slice(0,-1); console.log(removeChar)
+                const split = removeChar.split("/"); console.log(split)
+                const symbol = string.charAt(string.length-1); console.log(symbol)
+                operator("/",split[0], split[1])
+                header.innerText += symbol
+            }
         }
     })
 })
